@@ -1,7 +1,8 @@
 import { io } from  "socket.io-client";             //syntax to import module
+                                                    //io is a function that takes url and options as arguments
 
 
-export const initSocket = async() => {
+export const initSocket = async() => {              //read documentation of socket.io-client
     const options = {
         transports: ["websocket"],
         'force new connection': true,
@@ -9,5 +10,5 @@ export const initSocket = async() => {
         timeout: 10000
     };
 
-    return io("http://localhost:3000", options);            //backend url of react app
+    return io("http://localhost:5000", options);            //backend url of react app
 }

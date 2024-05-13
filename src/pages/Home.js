@@ -27,9 +27,11 @@ const Home = () => {
       return;
     }
 
+    setUsername(username.trim());
+
     //redirect to editor page
     navigate(`/editor/${roomID}`, {
-      state: { username: username }                 //used to pass data from one page to another
+      state: { username: username }                 //used to pass data from one page to another (state property of react router navigate function)
     });
   }
 
@@ -70,4 +72,4 @@ export default Home;
 
 //rafce - boilerplate for react arrow function component with export
 //onChange={(e) => {setRoomID(e.target.value)} - so that whenever a user types in the roomID, it will be updated in the state
-// setRoomID(id) in function createNewRoom(event) - to set the new unique roomID in the state
+//setRoomID(id) in function createNewRoom(event) - to set the new unique roomID in the state

@@ -22,7 +22,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home/>}></Route>
-            <Route path="/editor/:roomID" element={<EditorPage/>}></Route>
+            <Route path="/editor/:roomID" element={<EditorPage/>}></Route>      
           </Routes>
         </Router>
       </div>
@@ -31,3 +31,5 @@ function App() {
 }
 
 export default App;
+
+/*roomID is a dynamic route parameter*/
