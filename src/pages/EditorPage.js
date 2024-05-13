@@ -3,7 +3,7 @@
   import { Box, Button } from '@chakra-ui/react';
   import User from '../components/User';
   import CodeEditor from '../components/Editor'; 
-  import Navbar from "./Navbar"; 
+  // import Navbar from "./Navbar"; 
   import toast from 'react-hot-toast';
   import { initSocket } from '../socket';
   import ACTIONS from '../Actions';
@@ -123,7 +123,7 @@
         <Box width="16%" backgroundColor="#0c1522" boxShadow="0px 0px 10px 0px rgba(255, 255, 255, 0.5)" display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" alignContent="flex-start" padding="15px">
           <img src="/icon.png" alt="icon"  padding="20px" style={{ borderBottom: '2px solid #424242' }} /><br></br>
 
-           <Navbar /><br></br> 
+           {/* <Navbar /><br></br> // */}
           <h3 style={{ fontSize: '1.1rem',fontWeight: 'bold' }}>Connected</h3><br></br>
 
           <Box display="flex" flexDirection="column" flexWrap="wrap" gap="10px" flex="1" overflowY="auto">

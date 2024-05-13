@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 const Output = ({ sourceCode, language }) => {
   const [output, setOutput] = useState("");
+  const [isError, setIsError] = useState(false);
+
 
   const runCode = async () => {
       if (!language) {
@@ -19,7 +21,9 @@ const Output = ({ sourceCode, language }) => {
       try {
         const { run: result } = await executeCode(language, sourceCode);
       //   console.log("data:", run:result);
-        setOutput(result.output);
+        // setOutput(result.output);
+        setOutput(result.output.split("\n"));
+        result.stderr ? setIsError(true) : setIsError(false);
       } catch (error) {
         console.log("error:", error);
       }
@@ -31,7 +35,7 @@ const Output = ({ sourceCode, language }) => {
         <Button> Output: </Button>
         <Button colorScheme="green" onClick={runCode}>Run Code</Button>
       </div>
-      <Box height="13vh" width="177vh" border="1px solid" borderRadius={4} borderColor="#333" padding={3} color="gray.200">
+      <Box height="13vh" width="177vh" border="1px solid" borderRadius={4} borderColor="#333" padding={3} color={isError ? "red" : "white"}>
         {output ? output : 'Click "Run Code" to see the output'}
       </Box>
     </Box>
