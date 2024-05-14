@@ -21,8 +21,24 @@ Traditional coding environments lack real-time collaboration features, causing c
 
 ## ✨Output Demo
 
-### Home Page | Editor Page
+### Home Page 
+![Image 1](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20225857.png)
+![Image 2](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20214503.png)
 
+### Editor Page
+![Image 3](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20214850.png)
+
+### Copy Room ID
+![Image 6](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20215532.png)
+
+### Choose any language
+![Image 5](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20215037.png)
+
+### Compile your code
+![Image 4](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20214953.png)
+![Image 7](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20221725.png)
+![Image 8](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20224300.png)
+![Image 9](https://github.com/jahnavi-22/code-weave/blob/main/public/assets/Screenshot%202024-05-13%20225042.png)
 
 
 ## ▶️How to run
