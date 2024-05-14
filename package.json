@@ -17,11 +17,13 @@
     "@uiw/codemirror-themes": "^4.21.25",
     "@uiw/react-codemirror": "^4.21.25",
     "codemirror": "^6.0.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "framer-motion": "^6.5.1",
     "hoist-non-react-statics": "^3.3.2",
     "monaco-editor": "^0.48.0",
     "nodemon": "^3.1.0",
+    "path": "^0.12.7",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
@@ -38,7 +40,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set port=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -59,5 +61,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

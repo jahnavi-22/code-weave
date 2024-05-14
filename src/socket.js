@@ -2,7 +2,7 @@ import { io } from  "socket.io-client";             //syntax to import module
                                                     //io is a function that takes url and options as arguments
 
 
-export const initSocket = async() => {              //read documentation of socket.io-client
+export const initSocket = async() => {              //read documentation of socket.io-client again
     const options = {
         transports: ["websocket"],
         'force new connection': true,

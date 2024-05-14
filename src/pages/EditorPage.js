@@ -17,7 +17,6 @@
     const { roomID } = useParams();               // or window.location.pathname.split('/').pop();
     const codeRef = useRef({ code: '', language: '' });
     const [language, setLanguage] = useState("Choose Language");
-    const [output, setOutput] = useState("");
 
     //useRef to store the socket connection instance, used to store data that will not trigger a re-render on change unlike useState 
     

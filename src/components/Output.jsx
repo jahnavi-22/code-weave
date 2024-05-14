@@ -1,6 +1,6 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { executeCode } from "../API";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Output = ({ sourceCode, language }) => {
   const [output, setOutput] = useState("");
@@ -21,8 +21,7 @@ const Output = ({ sourceCode, language }) => {
       try {
         const { run: result } = await executeCode(language, sourceCode);
       //   console.log("data:", run:result);
-        // setOutput(result.output);
-        setOutput(result.output.split("\n"));
+        setOutput(result.output);
         result.stderr ? setIsError(true) : setIsError(false);
       } catch (error) {
         console.log("error:", error);

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require("http");
+const path = require('path');
 const { Server } = require('socket.io');            //Server class is being imported to create a new instance of the server
 const ACTIONS = require('./src/Actions');
 
@@ -55,21 +56,6 @@ io.on("connection", (socket) => {
         socket.in(roomID).emit(ACTIONS.LANGUAGE_CHANGE, {language});
     })
 
-    // socket.on(ACTIONS.RUN_CODE, async ({ language, sourceCode, roomID }) => {
-    //     try {
-    //       const { run: result } = await executeCode(language, sourceCode);
-    //       io.to(roomID).emit(ACTIONS.OUTPUT_CHANGE, { output: result.output });
-    //     } catch (error) {
-    //       console.log(err);
-    //     }
-    //   });
-
-    // socket.on(ACTIONS.RUN_CODE, async ({ language, sourceCode }) => {
-    //     const { run: result } = await executeCode(language, sourceCode);
-    //     io.to(roomID).emit(ACTIONS.OUTPUT_CHANGE, { output: result.output });
-    // });
-
-
     socket.on('disconnecting', () => {
         const rooms = [...socket.rooms];
         rooms.forEach((roomID) => {
@@ -83,6 +69,45 @@ io.on("connection", (socket) => {
     })
 })
 
-server.listen(5000, () =>{
-    console.log("Server is running on port 5000");
+require('dotenv').config();
+
+const port = process.env.PORT;
+
+/*
+ //------DEPLOYMENT-------
+
+    app.use(express.static(path.join(__dirname, 'build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
+
+const path = require('path');
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+    
+
+
+    //----------------------- */
+
+
+
+
+    
+console.log(__dirname);
+console.log(path.join(__dirname, 'build'));
+server.listen(port, () =>{
+    console.log(`Server is running on port ${port}`);
 })
