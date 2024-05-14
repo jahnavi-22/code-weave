@@ -37,6 +37,7 @@
           roomID: roomID,
           username: location.state?.username,
         });
+        console.log("userlist", users);
 
         //listen to joined event
         socketRef.current.on(ACTIONS.JOINED, ({users, username, socketID}) => {

@@ -74,14 +74,14 @@ require('dotenv').config();
 const port = process.env.PORT;
 
 /*
- //------DEPLOYMENT-------
+ //-----------------------------DEPLOYMENT---------------------------------------
 
     app.use(express.static(path.join(__dirname, 'build')));
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'));
     });
 
-const path = require('path');
+*/
 
 const __dirname1 = path.resolve();
 
@@ -100,12 +100,12 @@ if (process.env.NODE_ENV === "production") {
     
 
 
-    //----------------------- */
+ //----------------------------------------------------------------------
 
 
 
 
-    
+
 console.log(__dirname);
 console.log(path.join(__dirname, 'build'));
 server.listen(port, () =>{
