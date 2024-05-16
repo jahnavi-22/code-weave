@@ -9,6 +9,8 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const userSocketMap = {};
+
+
 function getConnectedUsers(roomID) {
     const uniqueUsernames = new Set();
 
@@ -30,25 +32,35 @@ function getConnectedUsers(roomID) {
 io.on("connection", (socket) => {
     console.log("Socket connected " + socket.id);
     
+
+    //listen to join event emitted by client
     socket.on(ACTIONS.JOIN, ({roomID, username}) => {
         userSocketMap[socket.id] = username;
         socket.join(roomID);
         const users = getConnectedUsers(roomID);
-        // console.log(users);
-        users.forEach(({socketID}) => {                     //send the joined event to all the users in the room to notify them of the new user
-            socket.in(socketID).emit(ACTIONS.JOINED, {          //sending to socketRef on editor page
-                users,
-                username,
-                socketID: socket.id,
-            })
-        })
+        console.log(users);
+    
+        // Emit JOINED event only to the user who just joined
+        socket.emit(ACTIONS.JOINED, {
+            users,
+            username,
+            socketID: socket.id,
+        });
+    
+        // Emit updated user list to all users in the room
+        socket.broadcast.to(roomID).emit(ACTIONS.JOINED, {
+            users,
+            username,
+            socketID: socket.id,
+        });
     });
+    
 
-    socket.on(ACTIONS.CODE_CHANGE, ({roomID, code}) => {
-        socket.in(roomID).emit(ACTIONS.CODE_CHANGE,{code});
+    socket.on(ACTIONS.CODE_CHANGE, ({roomID, code}) => {        //listen to code change event emitted by client
+        socket.in(roomID).emit(ACTIONS.CODE_CHANGE,{code});     //send the code change event to all the users in the room
     })
 
-    socket.on(ACTIONS.SYNC_CODE, ({code, socketID}) => {
+    socket.on(ACTIONS.SYNC_CODE, ({code, socketID}) => {        //same as  above.
         io.to(socketID).emit(ACTIONS.CODE_CHANGE, {code});
     })
 
@@ -56,7 +68,12 @@ io.on("connection", (socket) => {
         socket.in(roomID).emit(ACTIONS.LANGUAGE_CHANGE, {language});
     })
 
-    socket.on('disconnecting', () => {
+    socket.on(ACTIONS.OUTPUT_CHANGE, ({ output, roomID }) => {
+        socket.to(roomID).emit(ACTIONS.OUTPUT_CHANGE, { output });
+  });
+  
+
+    socket.on('disconnect', () => {
         const rooms = [...socket.rooms];
         rooms.forEach((roomID) => {
             socket.in(roomID).emit(ACTIONS.DISCONNECTED, {
@@ -64,7 +81,7 @@ io.on("connection", (socket) => {
                 username: userSocketMap[socket.id],
             });
         });
-        delete userSocketMap[socket.id];
+        delete userSocketMap[socket.id];            //delete the disconnected user's entry from the userSocketMap
         socket.leave();
     })
 })
@@ -81,7 +98,7 @@ const port = process.env.PORT;
         res.sendFile(path.join(__dirname, 'build', 'index.html'));
     });
 
-*/
+
 
 const __dirname1 = path.resolve();
 
@@ -97,17 +114,17 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-    
-
-
- //----------------------------------------------------------------------
-
-
-
-
 
 console.log(__dirname);
 console.log(path.join(__dirname, 'build'));
+
+
+ //----------------------------------------------------------------------
+*/
+
+
+
+
 server.listen(port, () =>{
     console.log(`Server is running on port ${port}`);
 })

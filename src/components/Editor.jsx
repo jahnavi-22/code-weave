@@ -1,6 +1,6 @@
-import { Box, VStack,Button, HStack } from '@chakra-ui/react';
+import { Box, VStack} from '@chakra-ui/react';
 import { Editor } from "@monaco-editor/react";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { CODE_SNIPPETS } from './Constants';
 import LanguageSelector from './LanguageSelector';
 import ACTIONS from '../Actions';

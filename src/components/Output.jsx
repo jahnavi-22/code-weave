@@ -1,8 +1,8 @@
 import { Box, Button } from "@chakra-ui/react";
 import { executeCode } from "../API";
-import { useState } from "react";
+import { useState} from "react";
 
-const Output = ({ sourceCode, language }) => {
+const Output = ({ sourceCode, language}) => {
   const [output, setOutput] = useState("");
   const [isError, setIsError] = useState(false);
 
@@ -17,16 +17,27 @@ const Output = ({ sourceCode, language }) => {
         return;
       }
       console.log("language:", language);
-      console.log("sourceCode:", sourceCode);
+      // console.log("sourceCode:", sourceCode);
       try {
         const { run: result } = await executeCode(language, sourceCode);
       //   console.log("data:", run:result);
         setOutput(result.output);
         result.stderr ? setIsError(true) : setIsError(false);
+        // onOutputChange(result.output);
       } catch (error) {
         console.log("error:", error);
       }
     };
+
+
+    // useEffect(() => {
+    //   socketRef.current.emit(ACTIONS.OUTPUT_CHANGE, {
+    //     roomID: roomID,
+    //     output: output,
+    //   });
+    // }, [output])
+
+   
  
   return (
     <Box w="100%">
