@@ -16,7 +16,7 @@
     const [users, setUsers] = useState([]);
     const { roomID } = useParams();               // or window.location.pathname.split('/').pop();
     const codeRef = useRef({ code: '', language: '' });
-    const [language, setLanguage] = useState("Choose Language");
+    const [language, setLanguage] = useState("javascript");
     // const [output, setOutput] = useState("");
 
     //useRef to store the socket connection instance, used to store data that will not trigger a re-render on change unlike useState 
@@ -40,26 +40,23 @@
         });
         console.log("userlist", users);
 
-        //listen to joined event
+        //listen to joined event (for user list updates)
         socketRef.current.on(ACTIONS.JOINED, ({users, username, socketID}) => {
-          if(username && username !== location.state.username){
-            toast.success(`${username} has joined the room.`);
-            console.log(`${username} has joined the room.`)
-          }
           setUsers(users);                                                        //updating the users state with the users received from the server
           console.log("Updated users", users);
-
 
           socketRef.current.emit(ACTIONS.SYNC_CODE, {
             code: codeRef.current.code,
             socketID,
           })
+        })
 
-          
-          // socketRef.current.emit(ACTIONS.LANGUAGE_CHANGE, {
-          //   language: codeRef.current.language,
-          //   socketID,
-          // })
+        //listen to user joined event (for notifications only)
+        socketRef.current.on(ACTIONS.USER_JOINED, ({username, socketID}) => {
+          if(username && username !== location.state.username){
+            toast.success(`${username} has joined the room.`);
+            console.log(`${username} has joined the room.`)
+          }
         })
 
         //listen to language change event
@@ -92,6 +89,7 @@
         if (socketRef.current) {
           socketRef.current.disconnect();
           socketRef.current.off(ACTIONS.JOINED);
+          socketRef.current.off(ACTIONS.USER_JOINED);
           socketRef.current.off(ACTIONS.LANGUAGE_CHANGE);
           socketRef.current.off(ACTIONS.DISCONNECTED);
         }

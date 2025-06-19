@@ -1,5 +1,7 @@
 import { LANGUAGE_VERSIONS } from "./components/Constants";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
 export const executeCode = async (language, sourceCode) => {
   const version = LANGUAGE_VERSIONS[language];
   const response = await fetch("https://emkc.org/api/v2/piston/execute", {

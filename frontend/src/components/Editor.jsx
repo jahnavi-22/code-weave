@@ -6,25 +6,20 @@ import LanguageSelector from './LanguageSelector';
 import ACTIONS from '../Actions';
 import Output from '../components/Output';
 
-
 const CodeEditor = ({socketRef, roomID, onCodeChange, onLanguageChange}) => {
-  const [value, setValue] = useState({});
-  const [language, setLanguage] = useState("Choose Language");
-
-  
+  const [value, setValue] = useState("");
+  const [language, setLanguage] = useState("javascript");
 
   const handleEditorChange = (value) => {
     setValue(value);
     onCodeChange(value);
     if(socketRef.current){
-      // console.log("working", value);
       socketRef.current.emit(ACTIONS.CODE_CHANGE, {
         roomID: roomID,
         code: value,
       })
     }
   }
-
 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
@@ -35,9 +30,9 @@ const CodeEditor = ({socketRef, roomID, onCodeChange, onLanguageChange}) => {
     });
   }
   
-
   useEffect(() => {
-    setValue(CODE_SNIPPETS[language]);
+    const snippet = CODE_SNIPPETS[language] || "";
+    setValue(snippet);
   },[language]);
 
   //handle code change
@@ -57,7 +52,6 @@ const CodeEditor = ({socketRef, roomID, onCodeChange, onLanguageChange}) => {
     }
   }, [socketRef.current]);
 
-
   //handle language change
   useEffect(()=>{
     if(socketRef.current){
@@ -75,30 +69,32 @@ const CodeEditor = ({socketRef, roomID, onCodeChange, onLanguageChange}) => {
 
   return (
     <Box>
-      <VStack backgroundColor={"#0c1522"} padding={2} >
+      <VStack backgroundColor={"#0c1522"} padding={2}>
+        <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: "#0c1522", padding: "10px 20px 11px 20px ", width: '100%'}}>
+          <LanguageSelector language={language} onSelect={handleLanguageChange} />
+        </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: "#0c1522", padding: "10px 20px 11px 20px ", width: '100%'}}>
-        <LanguageSelector language={language} onSelect={handleLanguageChange} />
-      </div>
-
-      <Box height="67vh">
+        <Box height="67vh">
           <Editor 
-                height="65vh"
-                width="177vh" 
-                theme="vs-dark" 
-                options={{minimap: { enabled: false }, }}
-                language ={language} 
-                // defaultValue={CODE_SNIPPETS[language]}
-                value={value}
-                onChange={handleEditorChange}
-                
-                >
-          </Editor>
+            height="65vh"
+            width="177vh" 
+            theme="vs-dark" 
+            options={{
+              minimap: { enabled: false },
+              fontSize: 14,
+              automaticLayout: true,
+              scrollBeyondLastLine: false,
+              wordWrap: 'on'
+            }}
+            language={language}
+            value={value}
+            onChange={handleEditorChange}
+          />
           <br></br>
-      </Box>
-      <Box height="20vh">
+        </Box>
+        <Box height="20vh">
           <Output sourceCode={value} language={language} />
-      </Box>
+        </Box>
       </VStack>
     </Box>
   )

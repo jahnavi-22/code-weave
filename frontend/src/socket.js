@@ -10,5 +10,7 @@ export const initSocket = async() => {              //read documentation of sock
         timeout: 10000
     };
 
-    return io("http://localhost:5000", options);            //backend url of react app
+    // Use environment variable or default to localhost:5000
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+    return io(backendUrl, options);            //backend url of react app
 }
