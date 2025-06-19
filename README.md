@@ -14,33 +14,9 @@ Revolutionize teamwork with CodeWeave, a real-time web based code editor and com
 </div>
 
 ## 💡Project Idea
-Traditional coding environments lack real-time collaboration features, causing challenges for multiple developers working on the same codebase. CodeWeave addresses this by providing a web-based code editor and compiler that enables seamless real-time collaboration among developers, streamlining the coding process and enhancing productivity in team-based software development projects.
-
+Technical interviews often rely on screen sharing or collaborative docs, which can be clunky and distracting. CodeWeave solves this by providing a dedicated, real-time collaborative code editor and compiler—making it easy for interviewers and candidates to write, run, and discuss code together in a focused environment. No more switching between docs and IDEs. Just code, collaborate, and communicate seamlessly.
 ## ⚙️Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=js,react,express,nodejs,html,css,npm,vscode)](https://skillicons.dev)
-
-## 🏗️Project Structure
-
-```
-code-weave/
-├── backend/           # Express.js + Socket.IO server
-│   ├── src/
-│   │   ├── server.js  # Main server file
-│   │   └── actions.js # Socket event constants
-│   ├── package.json
-│   └── README.md
-├── frontend/          # React application
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   └── ...
-│   ├── public/
-│   ├── package.json
-│   └── README.md
-├── package.json       # Root package.json with workspace scripts
-└── README.md
-```
 
 ## ✨Output Demo
 
@@ -65,45 +41,44 @@ code-weave/
 
 ## ▶️How to run
 
-### Quick Start (Recommended)
-```bash
-# Clone the repository
-git clone <repository-url>
-cd code-weave
+Got it! Here's the shortened version **without bash formatting**, clean and readable:
 
-# Install all dependencies
-npm run install:all
+---
 
-# Start both backend and frontend in development mode
-npm run dev
-```
+### 🚀 Quick Start
 
-### Manual Setup
+1. Clone the repository
+2. `cd code-weave`
+3. Run `npm run install:all`
+4. Start dev mode: `npm run dev`
 
-#### Backend Setup
-```bash
-cd backend
-npm install
-cp env.example .env
-npm run dev
-```
+---
 
-#### Frontend Setup
-```bash
-cd frontend
-npm install
-cp env.example .env
-npm start
-```
+### ⚙️ Manual Setup
 
-### Production Build
-```bash
-# Build frontend for production
-npm run build
+**Backend**
 
-# Start production server
-npm start
-```
+1. `cd backend`
+2. `npm install`
+3. Copy `.env.example` to `.env`
+4. `npm run dev`
+
+**Frontend**
+
+1. `cd frontend`
+2. `npm install`
+3. Copy `.env.example` to `.env`
+4. `npm start`
+
+---
+
+### 📦 Production
+
+1. Build frontend: `npm run build`
+2. Start server: `npm start`
+
+---
+
 
 ## 🔧Available Scripts
 
@@ -130,18 +105,3 @@ npm start
 - `GET /health` - Health check endpoint
 - WebSocket events for real-time communication
 
-## 📝Environment Variables
-
-### Backend (.env)
-```
-PORT=5000
-NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
-```
-
-### Frontend (.env)
-```
-REACT_APP_BACKEND_URL=http://localhost:5000
-```
-
-Voila! 🌟 CodeWeave is running...
